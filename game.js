@@ -118,11 +118,9 @@ class CPlayer {
     initGenBuffer(song,context,callback){
         this.init(song);
         var loop = ()=>{
-            console.log('generating ');
             var done = this.generate();
             if(done == 1){
                 var buffer = this.createAudioBuffer(context);
-                console.log('done');
                 return callback(buffer);
             }
             else{
@@ -2001,10 +1999,10 @@ class Game{
         }
         else if(item == 'quit'){
             this.gamePased = true;
-            document.exitFullscreen();
+            this.SoundSystem.stopBgm();
+            if(document.fullscreen || document.webkitIsFullScreen) document.exitFullscreen();
             this.dialog.remove();
             this.loadingScene();
-
         }
         else if(item == `config`){
             this.gamePased = true;
@@ -2026,7 +2024,6 @@ class Game{
                     <p>Place towers and upgrade them</p>
                     <p>You can also use the castle as tower and upgrade it</p>
                     <p>you will face 13 waves each level then new map</p>
-                    <p>you keep the castle upgrades but lose towers</p>
                     <p>you keep the castle upgrades but lose towers</p>
                 </div>
             `;
